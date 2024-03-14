@@ -8,8 +8,9 @@ export default function PlayerHand(){
     const [playerHand, setPlayerHand] = useState([]);
 
     useEffect(()=>{
-        let newHand = PicturePokerState.playerHand.map(card=>{
-            return new card("cpp");
+        let newHand = PicturePokerState.playerHand.map(playerCard=>{
+            const newCard = new card(playerCard)
+            return newCard;
         })
         setPlayerHand(newHand)
     }, [PicturePokerState.playerHand])
