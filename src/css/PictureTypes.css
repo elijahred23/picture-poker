@@ -1,0 +1,12 @@
+.image-container {
+    display: flex; /* Use flexbox */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+    align-items: center; /* Center items along the cross axis */
+  }
+  
+  .image-container img {
+    max-width: 100%; /* Ensure images don't exceed their container's width */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add space between images */
+  }
+  
