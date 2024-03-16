@@ -35,6 +35,17 @@ const numMatchesPoints = (cards, numMatches)=> {
 
 
 const winningHands = {
+    "nothing": {
+        value: 0,
+        isHand(cards){
+            let points = 0;
+            for(let pictureType of cards){
+                let rank = getRank(pictureType);
+                points += rank * 10; 
+            }
+            return points;
+        }
+    },
     "pair": {
         value: 1,
         isHand(cards) {
@@ -142,7 +153,7 @@ const winningHands = {
             return numMatchesPoints(cards, 5);
         },
     },
-    winningHandsList: ["five of a kind", "full house", "four of a kind", "three of a kind","two pair", "pair"],
+    winningHandsList: ["five of a kind", "full house", "four of a kind", "three of a kind","two pair", "pair", "nothing"],
     determineHand(cards){
         for(let hand of this.winningHandsList){
             let points = this[hand].isHand(cards);
