@@ -96,9 +96,9 @@ const winningHands = {
                 }
             }
         
-            const hasFullHouse = false;
-            const hasThree = false;
-            const hasTwo = false;
+            let hasFullHouse = false;
+            let hasThree = false;
+            let hasTwo = false;
             
             matchingSuits = Object.keys(suitCount).filter(suit => {
                 if(suitCount[suit] === 2){
