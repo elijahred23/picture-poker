@@ -4,6 +4,7 @@ import { PicturePokerProvider } from './components/PicturePokerProvider'
 import PictureTypes from './components/PictureTypes'
 import PlayerHand from './components/PlayerHand'
 import PicturePokerMenu from './components/PicturePokerMenu'
+import OpponentHand from './components/OpponentHand'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <PicturePokerProvider>
         <PictureTypes />           
         <PlayerHand />
+        <OpponentHand />
       </PicturePokerProvider>
     </div>
     </>
