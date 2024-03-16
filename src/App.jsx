@@ -13,8 +13,7 @@ function App() {
     <div>
       <PicturePokerMenu />
       <PicturePokerProvider>
-        <PictureTypes />
-        
+        <PictureTypes />           
         <PlayerHand />
       </PicturePokerProvider>
     </div>

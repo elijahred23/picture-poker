@@ -23,8 +23,8 @@ const ranks = {
     "php": 1,
 }
 
-const getRank = (rank) => {
-    return ranks[rank]
+const getRank = (pictureType) => {
+    return ranks[pictureType]
 }
 
 const pictureTypes = ["rust", "cpp", "javascript", "python", "csharp", "php"]; 

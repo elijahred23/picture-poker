@@ -1,4 +1,6 @@
 import {useReducer, useContext, createContext} from 'react';
+import { card } from '../utils/card';
+import { winningHands } from '../utils/winningHands';
 
 const PicturePokerContext = createContext();
 
@@ -9,21 +11,23 @@ const usePicturePokerContext = () => {
 }
 
 const initialState = {
-    gameDeck: null,
-    playerHand: ["cpp","cpp","cpp","cpp","cpp"],
+    playerHand: card.getRandomHand(),
 }
 
+let hand = winningHands.determineHand(initialState.playerHand);
+console.log({hand})
+
+
 const ActionTypes = {
-    SET_GAME_DECK: "SET_GAME_DECK",
     SET_PLAYER_HAND: "SET_PLAYER_HAND",
 }
 
 const PicturePokerReducer = (state, action) => {
     switch(action.type){
-        case ActionTypes.SET_GAME_DECK: 
+        case ActionTypes.SET_PLAYER_HAND: 
             return {
                 state,
-                gameDeck: state.gameDeck
+                playerHand: state.playerHand
             }
     }
 
