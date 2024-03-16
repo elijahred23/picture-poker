@@ -12,8 +12,8 @@ function App() {
   return (
     <>
     <div>
-      <PicturePokerMenu />
       <PicturePokerProvider>
+        <PicturePokerMenu />
         <PictureTypes />           
         <PlayerHand />
         <OpponentHand />

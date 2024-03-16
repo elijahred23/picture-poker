@@ -165,7 +165,36 @@ const winningHands = {
                 }
             }
         }      
+    },
+    determineWinner(playerHand, opponentHand){
+        let playerDeterminedHand = this.determineHand(playerHand);
+        let opponentDeterminedHand = this.determineHand(opponentHand);
+        const player = "player";
+        const opponent = "opponent";
+        const tie = "tie";
+        let winner = "";
+
+        if(playerDeterminedHand.value > opponentDeterminedHand.value){
+            winner = player;
+        }
+        else if(playerDeterminedHand.value < opponentDeterminedHand.value){
+            winner = opponent;
+        } else if(playerDeterminedHand.points > opponentDeterminedHand.points){
+            winner = player;
+        } else if(playerDeterminedHand.points < opponentDeterminedHand.points){
+            winner = opponent;
+        } else {
+            winner = tie 
+        }
+
+
+        return {
+            winner,
+            playerDeterminedHand,
+            opponentDeterminedHand
+        }
     }
+
 }
 
 
