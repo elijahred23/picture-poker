@@ -174,14 +174,14 @@ const winningHands = {
         const tie = "tie";
         let winner = "";
 
-        if(playerDeterminedHand.value > opponentDeterminedHand.value){
+        if(playerDeterminedHand?.value > opponentDeterminedHand?.value){
             winner = player;
         }
-        else if(playerDeterminedHand.value < opponentDeterminedHand.value){
+        else if(playerDeterminedHand?.value < opponentDeterminedHand?.value){
             winner = opponent;
-        } else if(playerDeterminedHand.points > opponentDeterminedHand.points){
+        } else if(playerDeterminedHand?.points > opponentDeterminedHand?.points){
             winner = player;
-        } else if(playerDeterminedHand.points < opponentDeterminedHand.points){
+        } else if(playerDeterminedHand?.points < opponentDeterminedHand?.points){
             winner = opponent;
         } else {
             winner = tie 

@@ -5,7 +5,11 @@ export default function Hand({cards}){
 
     return (<>
         {cards?.map(card => {
-            return <Card card={card} />
+            return (
+                <>
+                <Card card={card} /> 
+                </>
+            )
         })}
     </>)
 }

@@ -6,19 +6,40 @@ import { getRank } from "../utils/pictureTypes";
 
 export default function OpponentHand(){
     const {PicturePokerState} = usePicturePokerContext();
-    const [playerHand, setPlayerHand] = useState([]);
+    const [opponentHand, setOpponentHand] = useState([]);
     const [handRank, setHandRank] = useState('');
 
-    useEffect(()=>{
+    const updateOpponentHand = () => {
         let newHand = PicturePokerState.opponentHand?.map(playerCard=>{
             const newCard = new card(playerCard)
             return newCard;
         })
-        setPlayerHand(newHand)
-    }, [PicturePokerState.playerHand])
+        setOpponentHand(newHand)
+    }
+
+    useEffect(()=>{
+        if(PicturePokerState.opponentHandShowing){
+            updateOpponentHand();
+        }
+    }, [PicturePokerState.opponentHand])
+
+    useEffect(()=>{
+        if(PicturePokerState.opponentHandShowing){
+            updateOpponentHand();
+        }
+        else {
+            let hiddenCards = [];
+            for(let i = 0; i < 5; i++){
+                let newCard = new card("back_card")
+                console.log({newCard})
+                hiddenCards.push(newCard)
+            }
+            setOpponentHand(hiddenCards)
+        }
+    }, [PicturePokerState.opponentHandShowing])
 
     return (<>
         <p>Opponent Hand:</p>
-        <Hand cards={playerHand} />
+        <Hand cards={opponentHand} />
     </>)
 }

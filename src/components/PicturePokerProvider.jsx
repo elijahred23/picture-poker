@@ -13,10 +13,16 @@ const usePicturePokerContext = () => {
 let playerHand = card.getRandomHand();
 let opponentHand = card.getRandomHand();
 
+playerHand = ["csharp", "rust", "php", "php", "php"]
+opponentHand = ["csharp", "csharp", "csharp", "php", "rust"]
+
 const initialState = {
     playerHand: playerHand,
     opponentHand: opponentHand,
     currentWinner: "",
+    playerDeterminedHand: null,
+    opponentDeterminedHand: null,
+    opponentHandShowing: false,
 }
 
 let hand = winningHands.determineHand(initialState.playerHand);
@@ -25,10 +31,13 @@ console.log({hand})
 
 const ActionTypes = {
     SET_PLAYER_HAND: "SET_PLAYER_HAND",
+    SET_PLAYER_DETERMINED_HAND: "SET_PLAYER_DETERMINED_HAND",
     SET_OPPONENT_HAND: "SET_OPPONENT_HAND",
+    SET_OPPONENT_DETERMINED_HAND: "SET_PLAYER_DETERMINED_HAND",
     SET_RANDOM_PLAYER_HAND: "SET_RANDOM_PLAYER_HAND",
     SET_RANDOM_OPPONENT_HAND: "SET_RANDOM_OPPONENT_HAND",
-    SET_CURRENT_WINNER: "SET_CURRENT_WINNER"
+    SET_CURRENT_WINNER: "SET_CURRENT_WINNER",
+    SET_OPPONENT_HAND_SHOWING: "SET_OPPONENT_HAND_SHOWING" ,
 }
 
 const PicturePokerReducer = (state, action) => {
@@ -62,6 +71,22 @@ const PicturePokerReducer = (state, action) => {
                 ...state,
                 currentWinner: action.payload 
             }
+        case ActionTypes.SET_PLAYER_DETERMINED_HAND: 
+            return {
+                ...state,
+                playerDeterminedHand: action.payload 
+            }
+        case ActionTypes.SET_OPPONENT_DETERMINED_HAND: 
+            return {
+                ...state,
+                opponentDeterminedHand: action.payload 
+            }
+        case ActionTypes.SET_OPPONENT_HAND_SHOWING: 
+            return {
+                ...state,
+                opponentHandShowing: action.payload 
+            }
+        
     }
 
     return state;

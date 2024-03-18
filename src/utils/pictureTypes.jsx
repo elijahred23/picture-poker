@@ -4,6 +4,7 @@ import pythonImage from '../assets/python.png';
 import rustImage from '../assets/rust.png';
 import javascriptImage from '../assets/javascript.png';
 import csharpImage from '../assets/csharp.png';
+import backCardImage from '../assets/back_card.png';
 
 const pictureTypeSources = {
     "cpp": cppImage,
@@ -11,7 +12,8 @@ const pictureTypeSources = {
     "python": pythonImage,
     "javascript": javascriptImage,
     "csharp": csharpImage,
-    "rust": rustImage
+    "rust": rustImage,
+    "back_card": backCardImage
 }
 
 const ranks = {
@@ -27,7 +29,7 @@ const getRank = (pictureType) => {
     return ranks[pictureType]
 }
 
-const pictureTypes = ["rust", "cpp", "javascript", "python", "csharp", "php"]; 
+const pictureTypes = ["rust", "cpp", "javascript", "python", "csharp", "php" ]; 
 
 const getPictureSource = (pictureType)=>{
     return pictureTypeSources[pictureType] ?? null;
