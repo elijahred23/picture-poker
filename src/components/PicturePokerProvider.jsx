@@ -32,7 +32,6 @@ const ActionTypes = {
 }
 
 const PicturePokerReducer = (state, action) => {
-    let randomHand;
     switch(action.type){
         case ActionTypes.SET_PLAYER_HAND: 
             return {
@@ -45,18 +44,18 @@ const PicturePokerReducer = (state, action) => {
                 opponentHand: state.opponentHand
             }
         case ActionTypes.SET_RANDOM_PLAYER_HAND: 
-            randomHand = card.getRandomHand(); 
+            let randomPlayerHand = card.getRandomHand(); 
 
             return {
                 ...state,
-                playerHand: randomHand
+                playerHand: randomPlayerHand
             }
         case ActionTypes.SET_RANDOM_OPPONENT_HAND: 
-            let randomHand = card.getRandomHand(); 
+            let randomOpponentHand = card.getRandomHand(); 
 
             return {
                 ...state,
-                opponentHand: randomHand
+                opponentHand: randomOpponentHand 
             }
         case ActionTypes.SET_CURRENT_WINNER: 
             return {

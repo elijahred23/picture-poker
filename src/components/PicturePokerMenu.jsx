@@ -11,9 +11,15 @@ export default function PicturePokerMenu(){
         PicturePokerDispatch({type: ActionTypes.SET_CURRENT_WINNER, payload: winner})
     }
 
+    const dealNewHands = () => {
+        PicturePokerDispatch({type: ActionTypes.SET_RANDOM_PLAYER_HAND})
+        PicturePokerDispatch({type: ActionTypes.SET_RANDOM_OPPONENT_HAND})
+    }
+
     return (<>
     <h1>Picture Poker</h1> 
     <button onClick={whoWon}>Who won?</button>
+    <button onClick={dealNewHands}>Deal</button>
     <p>WINNER: {PicturePokerState.currentWinner}</p>
     </>)
 }
