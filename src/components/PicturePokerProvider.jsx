@@ -13,12 +13,10 @@ const usePicturePokerContext = () => {
 let playerHand = card.getRandomHand();
 let opponentHand = card.getRandomHand();
 
-playerHand = ['rust', 'cpp', 'javascript','python', 'csharp'];
-opponentHand = ['rust', 'cpp', 'javascript','python', 'php'];
-
 const initialState = {
     playerHand: playerHand,
     opponentHand: opponentHand,
+    currentWinner: "",
 }
 
 let hand = winningHands.determineHand(initialState.playerHand);
@@ -28,19 +26,42 @@ console.log({hand})
 const ActionTypes = {
     SET_PLAYER_HAND: "SET_PLAYER_HAND",
     SET_OPPONENT_HAND: "SET_OPPONENT_HAND",
+    SET_RANDOM_PLAYER_HAND: "SET_RANDOM_PLAYER_HAND",
+    SET_RANDOM_OPPONENT_HAND: "SET_RANDOM_OPPONENT_HAND",
+    SET_CURRENT_WINNER: "SET_CURRENT_WINNER"
 }
 
 const PicturePokerReducer = (state, action) => {
+    let randomHand;
     switch(action.type){
         case ActionTypes.SET_PLAYER_HAND: 
             return {
-                state,
+                ...state,
                 playerHand: state.playerHand
             }
         case ActionTypes.SET_OPPONENT_HAND: 
             return {
-                state,
+                ...state,
                 opponentHand: state.opponentHand
+            }
+        case ActionTypes.SET_RANDOM_PLAYER_HAND: 
+            randomHand = card.getRandomHand(); 
+
+            return {
+                ...state,
+                playerHand: randomHand
+            }
+        case ActionTypes.SET_RANDOM_OPPONENT_HAND: 
+            let randomHand = card.getRandomHand(); 
+
+            return {
+                ...state,
+                opponentHand: randomHand
+            }
+        case ActionTypes.SET_CURRENT_WINNER: 
+            return {
+                ...state,
+                currentWinner: action.payload 
             }
     }
 

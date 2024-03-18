@@ -10,7 +10,7 @@ export default function OpponentHand(){
     const [handRank, setHandRank] = useState('');
 
     useEffect(()=>{
-        let newHand = PicturePokerState.opponentHand.map(playerCard=>{
+        let newHand = PicturePokerState.opponentHand?.map(playerCard=>{
             const newCard = new card(playerCard)
             return newCard;
         })
