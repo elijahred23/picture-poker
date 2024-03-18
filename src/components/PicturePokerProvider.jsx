@@ -26,7 +26,6 @@ const initialState = {
 }
 
 let hand = winningHands.determineHand(initialState.playerHand);
-console.log({hand})
 
 
 const ActionTypes = {
