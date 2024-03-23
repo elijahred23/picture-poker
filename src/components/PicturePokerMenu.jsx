@@ -5,13 +5,12 @@ import { ActionTypes, usePicturePokerContext } from "./PicturePokerProvider"
 export default function PicturePokerMenu() {
     const { PicturePokerState, PicturePokerDispatch } = usePicturePokerContext();
 
-
     const whoWon = () => {
-        let { winner, playerDeterminedHand, opponentDeterminedHand } = winningHands.determineWinner(PicturePokerState.playerHand, PicturePokerState.opponentHand);
-        winner = winner.replace(/\b\w/, char => char.toUpperCase());
+        let {message, winner, playerDeterminedHand, opponentDeterminedHand } = winningHands.determineWinner(PicturePokerState.playerHand, PicturePokerState.opponentHand);
+        
         PicturePokerDispatch({ type: ActionTypes.SET_PLAYER_DETERMINED_HAND, payload: playerDeterminedHand })
         PicturePokerDispatch({ type: ActionTypes.SET_OPPONENT_DETERMINED_HAND, payload: opponentDeterminedHand })
-        PicturePokerDispatch({ type: ActionTypes.SET_CURRENT_WINNER, payload: winner })
+        PicturePokerDispatch({ type: ActionTypes.SET_CURRENT_WINNER, payload: message })
     }
 
     const dealNewHands = () => {

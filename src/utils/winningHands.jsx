@@ -15,14 +15,18 @@ const numMatchesPoints = (cards, numMatches)=> {
     }
 
     matchingSuits = Object.keys(suitCount).filter(suit => suitCount[suit] === numMatches);
+
+    console.log({suitCount, matchingSuits})
     const hasPair = matchingSuits?.length > 0;
+    if(!hasPair) return 0;
 
     for (let pictureType of pictureTypes) {
         let currentSuitCount = suitCount[pictureType];
+        if(currentSuitCount === undefined) continue;
         let rank = getRank(pictureType);
         if (currentSuitCount) {
-            if(currentSuitCount[pictureType] === numMatches){
-                points += currentSuitCount[pictureType] * (rank * 100); 
+            if(currentSuitCount === numMatches){
+                points += currentSuitCount * (rank * 100); 
             }  
             else {
                 points += (rank * 10); 
@@ -30,11 +34,12 @@ const numMatchesPoints = (cards, numMatches)=> {
         }
     }
 
-    return hasPair ? points : 0;
+    return points;
 }
 
 
 const winningHands = {
+    winningHandsList: ["nothing", "pair", "two pair", "three of a kind", "four of a kind", "full house", "five of a kind"],
     "nothing": {
         value: 0,
         isHand(cards){
@@ -74,8 +79,8 @@ const winningHands = {
                 let currentSuitCount = suitCount[pictureType];
                 let rank = getRank(pictureType);
                 if (currentSuitCount) {
-                    if(currentSuitCount[pictureType] === 2){
-                        points += currentSuitCount[pictureType] * (rank * 100); 
+                    if(currentSuitCount === 2){
+                        points += currentSuitCount * (rank * 100); 
                     }  
                     else {
                         points += (rank * 10); 
@@ -121,16 +126,17 @@ const winningHands = {
             });
             hasFullHouse = hasThree && hasTwo; 
         
+            if(!hasFullHouse) return 0;
 
             for (let pictureType of pictureTypes) {
                 let currentSuitCount = suitCount[pictureType];
                 let rank = getRank(pictureType);
                 if (currentSuitCount) {
-                    if(currentSuitCount[pictureType] === 2){
-                        points += currentSuitCount[pictureType] * (rank * 100); 
+                    if(currentSuitCount === 2){
+                        points += currentSuitCount * (rank * 100); 
                     }  
-                    else if(currentSuitCount[pictureType] === 3){
-                        points += currentSuitCount[pictureType] * (rank * 200); 
+                    else if(currentSuitCount === 3){
+                        points += currentSuitCount * (rank * 200); 
                     }  
                     else {
                         points += (rank * 10); 
@@ -138,7 +144,7 @@ const winningHands = {
                 }
             }
         
-            return hasFullHouse ? points : 0;
+            return points;
         }
     },
     "four of a kind": {
@@ -150,14 +156,16 @@ const winningHands = {
     "five of a kind": {
         value: 6,
         isHand(cards){
+            console.log({message: "GOT HERE"})
             return numMatchesPoints(cards, 5);
         },
     },
-    winningHandsList: ["five of a kind", "full house", "four of a kind", "three of a kind","two pair", "pair", "nothing"],
     determineHand(cards){
-        for(let hand of this.winningHandsList){
+        for(let i = (this.winningHandsList.length - 1); i >= 0; i--){
+            let hand = this.winningHandsList[i];
+            console.log({hand, handObject: this[hand]})
             let points = this[hand].isHand(cards);
-            if(points){
+            if(points > 0){
                 return {
                     points,
                     hand,
@@ -173,23 +181,30 @@ const winningHands = {
         const opponent = "opponent";
         const tie = "tie";
         let winner = "";
+        let message = "";
+        let winningHand;
+        console.log({playerDeterminedHand, opponentDeterminedHand})
 
-        if(playerDeterminedHand?.value > opponentDeterminedHand?.value){
+        if(playerDeterminedHand?.value > opponentDeterminedHand?.value || playerDeterminedHand?.points > opponentDeterminedHand?.points){
             winner = player;
+            winningHand = this.winningHandsList[playerDeterminedHand?.value];
+            message = `${player} won with a ${winningHand}`; 
         }
-        else if(playerDeterminedHand?.value < opponentDeterminedHand?.value){
+        else if(playerDeterminedHand?.value < opponentDeterminedHand?.value || playerDeterminedHand?.points < opponentDeterminedHand?.points){
             winner = opponent;
-        } else if(playerDeterminedHand?.points > opponentDeterminedHand?.points){
-            winner = player;
-        } else if(playerDeterminedHand?.points < opponentDeterminedHand?.points){
-            winner = opponent;
-        } else {
+            winningHand = this.winningHandsList[opponentDeterminedHand?.value];
+            message = `${opponent} won with a ${winningHand}`; 
+        } 
+        else {
             winner = tie 
+            winningHand = this.winningHandsList[playerDeterminedHand?.value];
+            message = `Both players win with a ${winningHand}`; 
         }
 
 
         return {
             winner,
+            message,
             playerDeterminedHand,
             opponentDeterminedHand
         }

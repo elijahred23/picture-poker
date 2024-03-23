@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import { getPictureSource } from '../utils/pictureTypes';
 
-
 export default function Card({card}){
     const imageSource = getPictureSource(card?.pictureType);
     
