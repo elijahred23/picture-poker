@@ -16,7 +16,6 @@ const numMatchesPoints = (cards, numMatches)=> {
 
     matchingSuits = Object.keys(suitCount).filter(suit => suitCount[suit] === numMatches);
 
-    console.log({suitCount, matchingSuits})
     const hasPair = matchingSuits?.length > 0;
     if(!hasPair) return 0;
 
@@ -156,14 +155,12 @@ const winningHands = {
     "five of a kind": {
         value: 6,
         isHand(cards){
-            console.log({message: "GOT HERE"})
             return numMatchesPoints(cards, 5);
         },
     },
     determineHand(cards){
         for(let i = (this.winningHandsList.length - 1); i >= 0; i--){
             let hand = this.winningHandsList[i];
-            console.log({hand, handObject: this[hand]})
             let points = this[hand].isHand(cards);
             if(points > 0){
                 return {
@@ -183,7 +180,6 @@ const winningHands = {
         let winner = "";
         let message = "";
         let winningHand;
-        console.log({playerDeterminedHand, opponentDeterminedHand})
 
         if(playerDeterminedHand?.value > opponentDeterminedHand?.value || playerDeterminedHand?.points > opponentDeterminedHand?.points){
             winner = player;
