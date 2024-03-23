@@ -31,7 +31,6 @@ export default function OpponentHand(){
             let hiddenCards = [];
             for(let i = 0; i < 5; i++){
                 let newCard = new card("back_card")
-                console.log({newCard})
                 hiddenCards.push(newCard)
             }
             setOpponentHand(hiddenCards)

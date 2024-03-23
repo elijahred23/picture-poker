@@ -38,7 +38,7 @@ const numMatchesPoints = (cards, numMatches)=> {
 
 
 const winningHands = {
-    winningHandsList: ["nothing", "pair", "two pair", "three of a kind", "four of a kind", "full house", "five of a kind"],
+    winningHandsList: ["nothing", "pair", "two pair", "three of a kind", "full house", "four of a kind", "five of a kind"],
     "nothing": {
         value: 0,
         isHand(cards){
@@ -180,13 +180,15 @@ const winningHands = {
         let winner = "";
         let message = "";
         let winningHand;
+    
+        let sameValue = playerDeterminedHand?.value === opponentDeterminedHand?.value;
 
-        if(playerDeterminedHand?.value > opponentDeterminedHand?.value || playerDeterminedHand?.points > opponentDeterminedHand?.points){
+        if(playerDeterminedHand?.value > opponentDeterminedHand?.value || ( sameValue && playerDeterminedHand?.points > opponentDeterminedHand?.points)){
             winner = player;
             winningHand = this.winningHandsList[playerDeterminedHand?.value];
             message = `${player} won with a ${winningHand}`; 
         }
-        else if(playerDeterminedHand?.value < opponentDeterminedHand?.value || playerDeterminedHand?.points < opponentDeterminedHand?.points){
+        else if(playerDeterminedHand?.value < opponentDeterminedHand?.value || (sameValue && playerDeterminedHand?.points < opponentDeterminedHand?.points)){
             winner = opponent;
             winningHand = this.winningHandsList[opponentDeterminedHand?.value];
             message = `${opponent} won with a ${winningHand}`; 

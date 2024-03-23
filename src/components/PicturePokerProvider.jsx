@@ -13,8 +13,8 @@ const usePicturePokerContext = () => {
 let playerHand = card.getRandomHand();
 let opponentHand = card.getRandomHand();
 
-playerHand = ["csharp", "rust", "php", "php", "php"]
-opponentHand = ["csharp", "csharp", "csharp", "php", "rust"]
+playerHand = ["rust", "python", "cpp", "rust", "rust"]
+opponentHand = ["php", "python", "php", "php", "php"]
 
 const initialState = {
     playerHand: playerHand,
